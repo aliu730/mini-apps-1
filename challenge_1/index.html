@@ -5,13 +5,23 @@
 </head>
 <body>
   <h1>Tic Tac Toe</h1>
-  <div class="board">
-    <div class="rowOne">
-      <span class="cell0-0">_</span>
-      <span class="cell0-1">_</span>
+  <div id="board">
+    <span class="xtitle">X won =</span>
+      <span id="xwon">0</span>
+    <span class="otitle">O won =</span>
+      <span id="owon">0</span>
+    <button onclick="resetBoard()" class="resetButt">RESET</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
+
+    <!-- <div class="rowOne">
+      <span class="cell0-0" onclick="placePiece(this)">_</span>
+      <span class="cell0-1" onclick="placePiece(this)">_</span>
       <span class="cell0-2">_</span>
-    </span>
-    <div class="rowTwo">
+    </div> -->
+    <!-- <div class="rowTwo">
       <span class="cell1-0">_</span>
       <span class="cell1-1">_</span>
       <span class="cell1-2">_</span>
@@ -20,8 +30,4 @@
       <span class="cell2-0">_</span>
       <span class="cell2-1">_</span>
       <span class="cell2-2">_</span>
-    </div>
-  </div>
-  <script src="app.js"></script>
-</body>
-</html>
+    </div> -->

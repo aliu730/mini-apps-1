@@ -15,7 +15,7 @@ let boardMaker = () => {
   let r1 = document.createElement('div');
   let r2 = document.createElement('div');
   r0.id ="r0";
-  r1.id ="r1";
+  r1.id ="r1"; 
   r2.id ="r2";
   
   for (let i = 0; i < 3; i++) {

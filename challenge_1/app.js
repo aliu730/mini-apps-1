@@ -16,6 +16,7 @@ let boardMaker = () => {
   r0.id ="r0";
   r1.id ="r1";
   r2.id ="r2";
+
   for (let i = 0; i < 3; i++) {
     let cell = document.createElement('span');
     cell.id ="r0-" + i;
@@ -23,6 +24,7 @@ let boardMaker = () => {
       placePiece(this);
     };
     cell.innerHTML = " _ ";
+    cell.style ="border: 1px solid black; width: fit-content;";
     r0.appendChild(cell);
     //now make r1
     let cell1 = document.createElement('span');
@@ -31,6 +33,7 @@ let boardMaker = () => {
     cell1.onclick = function() {
       placePiece(this);
     };
+    cell1.style = "border: 1px solid black; width: fit-content;";
     r1.appendChild(cell1);
     //r2
     let cell2 = document.createElement('span');
@@ -39,8 +42,10 @@ let boardMaker = () => {
     cell2.onclick = function() {
       placePiece(this);
     };
+    cell2.style = "border: 1px solid black; width: fit-content;";
     r2.appendChild(cell2);
   }
+;
   document.getElementById('board').appendChild(r0);
   document.getElementById('board').appendChild(r1);
   document.getElementById('board').appendChild(r2);
@@ -86,6 +91,7 @@ let checkWinR0 = () => {
         document.getElementById('xwon').innerHTML = x_wins;
         alert("PLAYER X WON");
         count_x = 0;
+        resetBoard();
       }
     }
     if(realBoard[0][i] === 'O') {
@@ -95,6 +101,7 @@ let checkWinR0 = () => {
         document.getElementById('owon').innerHTML = o_wins;
         alert("PLAYER O WON");
         count_o = 0;
+        resetBoard();
       }
     }
   }
@@ -113,6 +120,7 @@ let checkWinR1 = () => {
         document.getElementById('xwon').innerHTML = x_wins;
         alert("PLAYER X WON");
         count_x = 0;
+        resetBoard();
       }
     }
     if(realBoard[1][i] === 'O') {
@@ -122,6 +130,7 @@ let checkWinR1 = () => {
         document.getElementById('owon').innerHTML = o_wins;
         alert("PLAYER O WON");
         count_o = 0;
+        resetBoard();
       }
     }
   }
@@ -138,6 +147,7 @@ let checkWinR2 = () => {
         document.getElementById('xwon').innerHTML = x_wins;
         alert("PLAYER X WON");
         count_x = 0;
+        resetBoard();
       }
     }
     if(realBoard[2][i] === 'O') {
@@ -146,6 +156,7 @@ let checkWinR2 = () => {
         o_wins++;
         document.getElementById('owon').innerHTML = o_wins;
         alert("PLAYER O WON");
+        resetBoard();
         count_o = 0;
       }
     }
@@ -161,6 +172,7 @@ let checkDiag1 = () => {
         x_wins++;
         document.getElementById('xwon').innerHTML = x_wins;
         alert("PLAYER X WON");
+        resetBoard();
       }
     }
     if (realBoard[i][i] === "O" ) {
@@ -169,6 +181,7 @@ let checkDiag1 = () => {
         o_wins++;
         document.getElementById('owon').innerHTML = o_wins;
         alert("PLAYER O WON");
+        resetBoard();
       }
     }
   }
@@ -183,6 +196,7 @@ let checkDiag2 = () => {
         x_wins++;
         document.getElementById('xwon').innerHTML = x_wins;
         alert("PLAYER X WON");
+        resetBoard();
       }
     }
     if (realBoard[i][2-i] === "O") {
@@ -191,6 +205,7 @@ let checkDiag2 = () => {
         o_wins++;
         document.getElementById('owon').innerHTML = o_wins;
         alert("PLAYER O WON");
+        resetBoard();
       }
     }
   }
@@ -206,6 +221,7 @@ let checkTie = () => {
   }
   if (counter === 9) {
     alert("TIE");
+    resetBoard();
   }
 };
 //console.log(document.getElementsByClassName('xtitle').innerHTML)

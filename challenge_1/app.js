@@ -47,11 +47,15 @@ var boardMaker = () => {
 };
 boardMaker();
 var placePiece = (cell) => {
+  var row = (cell.id[1]);
+  var column = (cell.id[3]);
   if (piece % 2 === 0 && cell.innerHTML !== "X" && cell.innerHTML !== "O") {
     cell.innerHTML = 'X';
+    realBoard[row][column] = 'X';
     piece++;
   } else if (cell.innerHTML !== "X" && cell.innerHTML !== "O") {
     cell.innerHTML = 'O';
+    realBoard[row][column] = 'O';
     piece++;
   }
   checkWinR0();
@@ -59,8 +63,9 @@ var placePiece = (cell) => {
   checkWinR2();
   checkDiag1();
   checkDiag2();
+  console.log(realBoard);
 };
-//console.log(piece);
+
 
 // console.log("connected");
 //check Win func
@@ -73,7 +78,7 @@ var checkWinR0 = () => {
   // check row 0 win?
   for (var i = 0; i < 3; i++) {
     //console.log(document.getElementById('r0-'+i));
-    if (document.getElementById('r0-' + i).innerHTML === 'X') {
+    if (realBoard[0][i] === 'X') {
       count_x++;
       if(count_x === 3) {
         x_wins++;
@@ -82,7 +87,7 @@ var checkWinR0 = () => {
         count_x = 0;
       }
     }
-    if(document.getElementById('r0-' + i).innerHTML === 'O') {
+    if(realBoard[0][i] === 'O') {
       count_o++;
       if(count_o === 3) {
         o_wins++;
@@ -100,7 +105,7 @@ var checkWinR1 = () => {
   var count_o = 0;
   for (var i = 0; i < 3; i++) {
     //console.log(document.getElementById('r0-'+i));
-    if (document.getElementById('r1-' + i).innerHTML === 'X') {
+    if (realBoard[1][i] === 'X') {
       count_x++;
       if(count_x === 3) {
         x_wins++;
@@ -109,7 +114,7 @@ var checkWinR1 = () => {
         count_x = 0;
       }
     }
-    if(document.getElementById('r1-' + i).innerHTML === 'O') {
+    if(realBoard[1][i] === 'O') {
       count_o++;
       if(count_o === 3) {
         o_wins++;
@@ -125,7 +130,7 @@ var checkWinR2 = () => {
   var count_o = 0;
   for (var i = 0; i < 3; i++) {
     //console.log(document.getElementById('r0-'+i));
-    if (document.getElementById('r2-' + i).innerHTML === 'X') {
+    if (realBoard[2][i] === 'X') {
       count_x++;
       if(count_x === 3) {
         x_wins++;
@@ -134,7 +139,7 @@ var checkWinR2 = () => {
         count_x = 0;
       }
     }
-    if(document.getElementById('r2-' + i).innerHTML === 'O') {
+    if(realBoard[2][i] === 'O') {
       count_o++;
       if(count_o === 3) {
         o_wins++;
@@ -149,7 +154,7 @@ var checkDiag1 = () => {
   var count_x = 0;
   var count_o = 0;
   for (var i = 0; i < 3; i++) {
-    if (document.getElementById('r' + i + '-' + i).innerHTML === "X") {
+    if (realBoard[i][i] === "X") {
       count_x++;
       if (count_x === 3) {
         x_wins++;
@@ -157,7 +162,7 @@ var checkDiag1 = () => {
         alert("PLAYER X WON");
       }
     }
-    if (document.getElementById('r' + i + '-' + i).innerHTML === "O" ) {
+    if (realBoard[i][i] === "O" ) {
       count_o++;
       if (count_o === 3) {
         o_wins++;
@@ -171,7 +176,7 @@ var checkDiag2 = () => {
   var count_x = 0;
   var count_o = 0;
   for (var i = 0; i < 3; i++) {
-    if (document.getElementById('r' + i + '-' + (2-i) ).innerHTML === "X") {
+    if (realBoard[i][2-i] === "X") {
       count_x++;
       if (count_x === 3) {
         x_wins++;
@@ -179,7 +184,7 @@ var checkDiag2 = () => {
         alert("PLAYER X WON");
       }
     }
-    if (document.getElementById('r' + i + '-' + (2-i)).innerHTML === "O") {
+    if (realBoard[i][2-i] === "O") {
       count_o++;
       if (count_o === 3) {
         o_wins++;
@@ -189,6 +194,7 @@ var checkDiag2 = () => {
     }
   }
 };
+console.log(document.getElementsByClassName('xtitle').innerHTML)
 var resetBoard = () => {
   //remove all rows.
   var r0 = document.getElementById('r0');
@@ -197,5 +203,6 @@ var resetBoard = () => {
   r0.parentNode.removeChild(r0);
   r1.parentNode.removeChild(r1);
   r2.parentNode.removeChild(r2);
+  realBoard = [[],[],[]];
   boardMaker();
 };

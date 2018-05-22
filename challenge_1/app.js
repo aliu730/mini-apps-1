@@ -6,6 +6,7 @@ let games = 0;
 let realBoard = [[],[],[]];
 //generate a board
 let boardMaker = () => {
+  piece = 0;
   games++;
   let lineBreak = document.createElement('div');
   lineBreak.innerHTML = ("GAME "+ games);
@@ -16,7 +17,7 @@ let boardMaker = () => {
   r0.id ="r0";
   r1.id ="r1";
   r2.id ="r2";
-
+  
   for (let i = 0; i < 3; i++) {
     let cell = document.createElement('span');
     cell.id ="r0-" + i;

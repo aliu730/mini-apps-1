@@ -1,0 +1,30 @@
+{
+  "name": "jsonpack",
+  "version": "1.0.0",
+  "description": "should have express and react",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "babel": "babel client --out-dir public --presets=env,react --source-maps inline -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aliu730/hrsf95-mini-apps-1/tree/master/challenge_3"
+  },
+  "keywords": [
+    "express",
+    "react"
+  ],
+  "author": "andrewliu",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.3"
+  }
+}

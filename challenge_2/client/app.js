@@ -3,7 +3,7 @@ $(document).ready(function () {
     //console.log($("input:first").val());
     //make our ajax pass to our express server
     var text = ($('input:first').val());
-    //console.log(text);
+    console.log(text);
     $.ajax({
       type: 'POST',
       url: "http://localhost:3000/submission",

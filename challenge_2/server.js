@@ -9,9 +9,16 @@ app.post('/submission', function(req,res) {
   var csvFormat = "";
   var keys = Object.keys(req.body);
   keys.pop();
+  var copyKeys = keys;
+  //console.log(copyKeys);
   keys += "<br>";
   var deconstruct = (manager) => {
-    csvFormat += (`${manager.firstName},${manager.lastName},${manager.county},${manager.city},${manager.role},${manager.sales}<br>`);
+    for (var i = 0; i < copyKeys.length; i++) {
+      csvFormat += (manager[copyKeys[i]]);
+      if (i === copyKeys.length-1) {
+        csvFormat += "<br>"
+      }
+    }
     if (manager.children.length !== 0) {
       for (var i = 0; i < manager.children.length; i++) {
         deconstruct(manager.children[i]);
@@ -19,7 +26,7 @@ app.post('/submission', function(req,res) {
     }   
   };
   deconstruct(myData);
-  console.log(csvFormat);
+  //console.log(csvFormat);
   res.send(keys + csvFormat);
 });
 

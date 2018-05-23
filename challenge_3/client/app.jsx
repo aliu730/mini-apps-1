@@ -2,6 +2,7 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state= {
+      page: 0,
       name: "",
       email: "",
       password: "",
@@ -12,6 +13,7 @@ class App extends React.Component {
       zip: "",
       cc: "",
       expDate: "",
+      cvv: "",
       zip: "",
       zipBill: "",
       accCreate: 
@@ -28,6 +30,14 @@ class App extends React.Component {
         cityField={this.cityField.bind(this)}
         stateField={this.stateField.bind(this)}
         zipField={this.zipField.bind(this)}
+        onAccClick={this.onAccClicked.bind(this)}
+      />,
+      payForm: 
+      <PayForm
+        cc={this.cc.bind(this)}
+        expDate={this.expDate.bind(this)}
+        cvv={this.cvv.bind(this)}
+        zipFieldBill={this.zipFieldBill.bind(this)}
       />,
       currentDisplay: <FormAcc 
         nameRead={this.userNameField.bind(this)}
@@ -56,11 +66,17 @@ class App extends React.Component {
   }
   onAccClicked (e) { // goes to next form. (ships)
     e.preventDefault();
-    console.log("clicked")
-    this.setState({
-      currentDisplay: this.state.shipForm,
-    });
-
+    if (this.state.page === 0) {
+      this.setState({
+        currentDisplay: this.state.shipForm,
+      });
+      this.state.page = 1;
+    } else if (this.state.page === 1) {
+      this.setState({
+        currentDisplay: this.state.payForm,
+      });
+      this.state.page = 0;
+    }
   }
   // SHIP STUFF
   line1Field (event) {
@@ -95,6 +111,27 @@ class App extends React.Component {
       </div>  
     )
   }
+  // Pay Form stuff
+  cc (event) {
+    this.setState({
+      cc: event.target.value,
+    });
+  }
+  expDate (event) {
+    this.setState({
+      expDate: event.target.value,
+    });
+  }
+  cvv (event) {
+    this.setState({
+      cvv: event.target.value,
+    })
+  }
+  zipFieldBill (event) {
+    this.setState({
+      zipBill: event.target.value,
+    });
+  }
 };
 
 var FormAcc = (props) => {
@@ -103,17 +140,17 @@ var FormAcc = (props) => {
     <div className="accHead"> ACCOUNT CREATE MUST FILL </div>
     <label>
       Name:
-      <input onChange={props.nameRead} type="text" placeholder="required" required/><br />
+      <input onChange={props.nameRead} type="text" placeholder="required" required /><br />
     </label>
     <label>
       Email:
-      <input onChange={props.emailRead} type="text" placeholder="required" required/><br />
+      <input onChange={props.emailRead} type="text" placeholder="required" required /><br />
     </label>
     <label>
       Password: 
-      <input onChange={props.passField} type="text" placeholder="required" required/><br />
+      <input onChange={props.passField} type="text" placeholder="required" required /><br />
     </label>
-      <button onClick={props.onAccClick}>Checkout</button> 
+      <input type="submit" value="Next" onClick={props.onAccClick}/> 
     </form>  
   )
 };
@@ -122,21 +159,21 @@ var ShipForm = (props) => {
     <form className="shipForm">
     <div>Shipping Address</div>
     <label> Line1:
-      <input type="text" placeholder="required" required /><br />
+      <input onChange={props.line1Field} type="text" placeholder="required" required /><br />
     </label>
     <label> Line2:
-      <input type="text" placeholder="required" required /><br />
+      <input onChange={props.line2Field} type="text" placeholder="required" required /><br />
     </label>
     <label> City:
-      <input type="text" placeholder="required" required /><br />
+      <input onChange={props.cityField} type="text" placeholder="required" required /><br />
     </label>  
     <label> State:
-      <input type="text" placeholder="required" required /><br />
+      <input onChange={props.stateField} type="text" placeholder="required" required /><br />
     </label>
     <label> Zip:
-      <input type="text" placeholder="required" required /><br />
+      <input onChange={props.zipField} type="text" placeholder="required" required /><br />
     </label>
-      <input type="submit" value="Next" />
+      <input type="submit" value="Next" onClick={props.onAccClick} />
     </form>
   )
 };
@@ -146,17 +183,18 @@ var PayForm = (props) => {
     <form className="payForm">
       <div>Payment Method</div>
       <label> Credit Card #:
-        <input type="text" placeholder="required" required /><br />
+        <input onChange={props.cc} type="text" placeholder="required" required /><br />
       </label>
       <label> Expiration Date:
-        <input type="text" placeholder="required" required /><br />
+        <input onChange={props.expDate} type="text" placeholder="required" required /><br />
       </label>
       <label> CVV:
-        <input type="text" placeholder="required" required /><br />
+        <input onChange={props.cvv} type="text" placeholder="required" required /><br />
       </label>
       <label> Billing Zip:
-        <input type="text" placeholder="required" required /><br />
+        <input onChange={props.zipFieldBill} type="text" placeholder="required" required /><br />
       </label>
+      <input type="submit" value="Finalize No Refunds" />
     </form>  
   )
 };

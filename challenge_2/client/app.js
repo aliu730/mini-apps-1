@@ -11,8 +11,6 @@ $(document).ready(function () {
       data: text,
       success: function(data) {
         $('body').append(data);
-        
-        //console.log(data)
       },
       error: function() {
         console.log("err");

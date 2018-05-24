@@ -38,6 +38,7 @@ class App extends React.Component {
         expDate={this.expDate.bind(this)}
         cvv={this.cvv.bind(this)}
         zipFieldBill={this.zipFieldBill.bind(this)}
+        onAccClick={this.onAccClicked.bind(this)}
       />,
       currentDisplay: <FormAcc 
         nameRead={this.userNameField.bind(this)}
@@ -48,6 +49,22 @@ class App extends React.Component {
     }
   }
   //ACC CREATE:
+  generateData () {
+    var data = {};
+    data.name = this.state.name;
+    data.email = this.state.email;
+    data.password = this.state.password;
+    data.line1 = this.state.line1;
+    data.line2 = this.state.line2;
+    data.city = this.state.city;
+    data.state = this.state.state;
+    data.zip = this.state.zip;
+    data.cc = this.state.cc;
+    data.expDate = this.state.expDate;
+    data.cvv = this.state.cvv;
+    data.zipBill = this.state.zipBill;
+    return data;
+  }
   userNameField (event) {
     // console.log(event);
     this.setState({
@@ -75,7 +92,27 @@ class App extends React.Component {
       this.setState({
         currentDisplay: this.state.payForm,
       });
+      this.state.page = 2;
+    } else { // we post here
+      var jsonData = this.state;
+      var data = this.generateData();
+      //console.log(data);
+      $.ajax({
+        url: "/post",
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(data) {
+          console.log(data);
+        },
+        failure: function (error) {
+          console.log(error);
+        },
+      });
       this.state.page = 0;
+      this.setState({
+        currentDisplay: this.state.accCreate,
+      })
     }
   }
   // SHIP STUFF
@@ -140,15 +177,15 @@ var FormAcc = (props) => {
     <div className="accHead"> ACCOUNT CREATE MUST FILL </div>
     <label>
       Name:
-      <input onChange={props.nameRead} type="text" placeholder="required" required /><br />
+      <input onChange={props.nameRead} type="text" placeholder="required" required/><br />
     </label>
     <label>
       Email:
-      <input onChange={props.emailRead} type="text" placeholder="required" required /><br />
+      <input onChange={props.emailRead} type="text" placeholder="required" required/><br />
     </label>
     <label>
       Password: 
-      <input onChange={props.passField} type="text" placeholder="required" required /><br />
+      <input onChange={props.passField} type="text" placeholder="required" /><br />
     </label>
       <input type="submit" value="Next" onClick={props.onAccClick}/> 
     </form>  
@@ -194,11 +231,10 @@ var PayForm = (props) => {
       <label> Billing Zip:
         <input onChange={props.zipFieldBill} type="text" placeholder="required" required /><br />
       </label>
-      <input type="submit" value="Finalize No Refunds" />
+      <input type="submit" value="Finalize No Refunds" onClick={props.onAccClick} />
     </form>  
   )
 };
-
 
 
 

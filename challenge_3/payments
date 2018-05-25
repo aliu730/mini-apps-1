@@ -1,0 +1,50 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//create schema and model
+
+const paidPersonsSchema = new Schema({ //making a schema
+  name: String,
+  email: String,
+  password: String,
+  line1: String,
+  line2: String,
+  city: String,
+  state: String,
+  zip: Number,
+  cc: Number,
+  expDate: String,
+  cvv: Number,
+  zip: Number,
+  zipBill: Number,  
+});
+
+const paidPersons = mongoose.model('paidPersonsSchema'); // making a model
+
+module.exports = paidPersons;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// name: "",
+// email: "",
+// password: "",
+// line1: "",
+// line2: "",
+// city: "", 
+// state: "",
+// zip: "",
+// cc: "",
+// expDate: "",
+// cvv: "",
+// zip: "",
+// zipBill: "",

@@ -8,7 +8,7 @@ class App extends React.Component {
       password: "",
       line1: "",
       line2: "",
-      city: "",
+      city: "", 
       state: "",
       zip: "",
       cc: "",
